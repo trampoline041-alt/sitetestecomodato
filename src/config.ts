@@ -1,5 +1,5 @@
 export const config = {
-  brand: 'Ambev',
+  brand: 'Sua Marca',
   product: 'Comodato',
   analysis: { status: 'Em andamento' as const },
 }

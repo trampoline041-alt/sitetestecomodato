@@ -19,7 +19,7 @@ export default function CadastroForm({ onSubmit }: { onSubmit: (t: Tipo, fat: st
   const [tipo, setTipo] = useState<Tipo>('CPF')
   const [vals, setVals] = useState<Record<string, string>>({})
   const [touched, setTouched] = useState(false)
-  const [fat, setFat] = useState('mensal')
+  const [fat, setFat] = useState('')
   const [busy, setBusy] = useState(false)
   const fields = FIELDS[tipo]
   const submit = (e: React.FormEvent) => {
@@ -36,7 +36,7 @@ export default function CadastroForm({ onSubmit }: { onSubmit: (t: Tipo, fat: st
       <input id={f.k} className={bad ? 'bad' : v && f.ok(v) ? 'good' : ''} type={f.type ?? 'text'} inputMode={f.mask ? 'numeric' : undefined} placeholder={f.ph} value={v} autoComplete="off"
         onChange={e => setVals({ ...vals, [f.k]: f.mask ? f.mask(e.target.value) : e.target.value })} />
       {bad && <small className="err">Verifique este campo.</small>}</div> })}
-    <FaturamentoSelector value={fat} onChange={setFat} />
+    <FaturamentoSelector value={fat} onChange={setFat} error={touched && !fat} />
     <button className="btn" disabled={busy}>{busy ? 'Enviando…' : <>Continuar <Icon n="arrow" s={20} /></>}</button>
     <p className="safe"><Icon n="lock" s={18} /> Seus dados estão seguros conosco.</p>
     <p className="login"><a href="#" onClick={e => e.preventDefault()}>Já tem cadastro? Entrar</a></p>
